@@ -1,0 +1,96 @@
+html,
+body {
+	font-family: Montserrat, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: var(--black);
+	background-color: #fffafa;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+	width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+	background: #e9e7e718;
+	border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #e9dfe9f0;
+	border-radius: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.not-found-page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background-color: var(--);
+	text-align: center;
+}
+
+.not-found-page h1 {
+	font-size: 40px;
+}
+
+.not-found-page a {
+	font-size: 20px;
+}
+
+.not-found-page a:hover {
+	color: var(--black);
+}
+
+li {
+	list-style-type: none;
+}
+
+:root {
+	--black: rgb(77, 75, 75);
+	--white: #ffffff;
+	--orange: #F77F00;
+	--gray: #969696;
+	--primary: #C5C5C4;
+	--back: #FFBE0B;
+	--green: #060606;
+	--green-light: rgb(177, 164, 164);
+	--font-family: "Poppins", sans-serif;
+}
+
+.wrapper-spin {
+	height: 100vh;
+	width: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--back);
+	z-index: 10;
+}
+
+.spin-loading {
+	height: 100px;
+	width: 100px;
+	margin: 0 auto;
+	animation: rotation 0.5s infinite linear;
+	border: 6px solid var(--black);
+}
+
+@keyframes rotation {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(359deg);
+	}
+}

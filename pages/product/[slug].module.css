@@ -1,0 +1,101 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(3, auto auto auto);
+	grid-template-rows: 1fr;
+	grid-template-areas: "heading image product-info";
+	text-align: center;
+}
+
+.container-info {
+	position: relative;
+	z-index: 1;
+	color: var(--white);
+	grid-area: image;
+	text-align: center;
+}
+
+.container-product-info {
+	z-index: 80;
+}
+
+.heading {
+	margin-top: 50px;
+	z-index: 50;
+	grid-area: heading;
+	margin-right: 100px;
+}
+
+.container-info::before {
+	opacity: 1;
+	left: 0;
+	top: 130px;
+	border-radius: 50%;
+	content: "";
+	z-index: -100;
+	position: absolute;
+	background-color: var(--white);
+	background-image: url("../../assets/smile.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 500px;
+	width: 500px;
+	
+	box-shadow: inset 0 0 14px 0 rgba(242, 227, 227, 0.5);
+}
+
+.circle {
+	display: none;
+	grid-area: variabl;
+	margin-left: 80px;
+	flex: 50%;
+	margin-top: 180px;
+	z-index: 2;
+	gap: 20px;
+}
+
+.circle > div {
+	cursor: pointer;
+	border: 1px solid var(--black);
+	box-shadow: 5px 5px 5px -5px rgb(34 60 80 / 60%) inset;
+	font-size: 24px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	background-color: var(--white);
+	transition: box-shadow 0.1s linear;
+}
+
+.circle > div:hover {
+	box-shadow: 10px 10px 10px 0 rgb(163 161 161 / 60%) inset;
+}
+
+@media (max-width: 810px) {
+	.wrapper {
+		display: block;
+	}
+
+	.circle > div {
+		display: block;
+	}
+
+	.heading {
+		display: none;
+	}
+
+	.container-info::before {
+		display: none;
+	}
+
+	.container-info {
+		margin: -30px;
+	}
+
+	.container-product-info {
+		display: flex;
+		justify-content: center;
+	}
+}
