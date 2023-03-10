@@ -1,0 +1,19 @@
+.seccion{
+    display: flex;
+    width: 1300px;
+    height: 430px;
+    margin: 0 auto;
+  }
+  .img {
+    width: 0;
+    flex-grow: 2;
+    object-fit: cover;
+    opacity: .9;
+    transition: 0.9s ease;
+  }
+  
+  .img:hover{
+    width: 300px;
+    opacity: 1;
+    filter: contrast(120%);
+  }

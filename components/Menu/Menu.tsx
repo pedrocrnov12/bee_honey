@@ -25,18 +25,20 @@ export const Menu: FC = () => {
 					})}
 				</div>
 				
-					<Cart></Cart>
-
 					
 
+					
+				<div >
+				<Cart></Cart>
+					
+			
+			</div>
 					
 				
 			</div>
+			
 
-
-			<Link style={{}} href='/login'>
-				inciar sesion
-			</Link>
+			
 			
 
 			

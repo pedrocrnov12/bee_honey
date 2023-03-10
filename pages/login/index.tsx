@@ -18,7 +18,7 @@ const Login: React.FC = () => {
       
       // Guarda el token en el almacenamiento local
       localStorage.setItem('token', response.token);
-      router.push('/productos');
+      router.push('/pay');
     } catch (error) {
       setError('');
     }

@@ -1,160 +1,99 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Swal from 'sweetalert2';
-import Link from "next/link";
+  import React, { useState } from "react";
+  import axios from "axios";
+  import Swal from 'sweetalert2';
+  import Link from "next/link";
+  import 'bootstrap/dist/css/bootstrap.css'
+  import 'animate.css';
+  import { url } from "inspector";
+  import Navbar from "../../components/navadmin/admin";
 
-interface NewProduct {
-  
-  Id_Categoria: number;
-  Nombre_Producto: string
-  Descripcion_Producto: string
-  Costo_Producto: number;
-  Existencias: number;
-}
 
-const AddProduct: React.FC = () => {
-  const [product, setProduct] = useState<NewProduct>({ Id_Categoria: 0, Nombre_Producto:"", Descripcion_Producto:"" , Costo_Producto: 0, Existencias: 0 });
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setProduct({ ...product, [name]: value });
-  };
-
-  const addProduct = (product: NewProduct) => {
-    axios
-      .post("http://localhost:4000/bee/productos", product)
-      .then(response => { (response.headers)
-        console.log("Product added successfully");
-        // Actualiza la lista de productos después de agregar el nuevo producto
-      })
-      .catch(error => console.error(error));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    addProduct(product);
-  };
-  
-  return (
+  interface NewProduct {
     
+    Id_Categoria: number;
+    Nombre_Producto: string
+    Descripcion_Producto: string
+    Costo_Producto: number;
+    Existencias: number;
+    image_url: string;
+  }
+
+  const AddProduct: React.FC = () => {
+    const [product, setProduct] = useState<NewProduct>({ Id_Categoria: 0, Nombre_Producto:"", Descripcion_Producto:"" , Costo_Producto: 0, Existencias: 0, image_url:""});
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+      setProduct({ ...product, [name]: value });
+    };
+
+    const addProduct = (product: NewProduct) => {
+      axios
+        .post("http://localhost:4000/bee/productos", product)
+        .then(response => { (response.headers)
+          console.log("Product added successfully");
+          // Actualiza la lista de productos después de agregar el nuevo producto
+        })
+        .catch(error => console.error(error));
+    };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      addProduct(product);
+    };
     
-    <div style={{ 
-      height: "100vh", 
-      width: "100vw", 
-      display: "flex", 
-      alignItems: "center", 
-      justifyContent: "center", 
-      backgroundImage: `url(/add.jpg)`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      position: "relative"
-  }}>
-    <div style={{color: 'orange', borderRadius:'1em', backgroundColor:'white',}}>
-      <Link href='/productos/updateproduct'>Actualizar productos</Link>
-    </div>
-    
-    
-    <form onSubmit={handleSubmit} style={{ 
+    return (
+      
+      <div style={{ backgroundImage: `url(/lkk.jpg)`,
         
-      backgroundImage: `url(/l.jpg)`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      display: "flex", 
-      flexDirection: "column", 
-      alignItems: "center", 
-      padding: "1em", 
-      height: "65%", 
-      width: "30%", 
-      position: "relative" ,
-      margin :'auto',
-      
-      marginTop:'30vh'
-
-      
-      
-    }}>
-      <br />
-      <label htmlFor="Id_Categoria" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
-        Id_Categoria:
-        <input
-          type="text"
-          id="Id_Categoria"
-          name="Id_Categoria"
-          value={product.Id_Categoria}
-          onChange={handleInputChange}
-          style={{ padding: "10px", fontSize: "16px", borderRadius: "5px" }}
-        />
-      </label>
-      <label htmlFor="Nombre_Producto" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", marginTop: "20px" }}>
-        Nombre_Producto:
-        <input
-          type="text"
-          id="Nombre_Producto"
-          name="Nombre_Producto"
-          value={product.Nombre_Producto}
-          onChange={handleInputChange}
-          style={{ padding: "10px", fontSize: "16px", borderRadius: "5px" }}
-        />
-      </label>
-      <label htmlFor="Descripcion_Producto" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", marginTop: "20px" }}>
-        Descripcion_Producto:
-        <input
-          type="text"
-          id="Descripcion_Producto"
-          name="Descripcion_Producto"
-          value={product.Descripcion_Producto}
-          onChange={handleInputChange}
-          style={{ padding: "10px", fontSize: "16px", borderRadius: "5px" }}
-        />
-      </label>
-      <label htmlFor="Costo_Producto" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", marginTop: "20px" }}>
-        Costo_Producto:
-        <input
-          type="text"
-          id="Costo_Producto"
-          name="Costo_Producto"
-          value={product.Costo_Producto}
-          onChange={handleInputChange}
-          style={{ padding: "10px", fontSize: "16px", borderRadius: "5px" }}
-        />
-      </label>
-      <label htmlFor="Existencias" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", marginTop: "20px" }}>
-        Existencias:
-        <input
-          type="text"
-          id="Existencias"
-          name="Existencias"
-          value={product.Existencias}
-          onChange={handleInputChange}
-          style={{ padding: "10px", fontSize: "16px", borderRadius: "5px" }}
-        />
-      </label>
-      
-      
-      
-      <button
-    style={{ padding: "10px", fontSize: "16px", borderRadius: "5px", marginTop:'3em' }}
-    type="submit"
-    onClick={() => {
-    Swal.fire("Producto agregado", "", "success");
-  }}
->
-    Agregar producto
-</button>
-
-
-
-
-
-
-
-    </form>
-  
-  </div>
-  );
-};
-
-
-
-
-export default AddProduct;
+        width: '100%',
+        padding: '100px',
+        backgroundSize: 'cover',
+    
+        
+        }}>
+          <div>
+            <Navbar></Navbar>
+          </div>
+        <form onSubmit={handleSubmit} className="p-4 position-relative bg-light rounded-3 shadow-sm animate__animated animate__slideInUp" style={{ height: "65%", width: "35%", margin: "auto", }}>
+          <h3 className="text-center mb-4">Agregar Producto</h3>
+          <div className="mb-3">
+            <label htmlFor="Id_Categoria" className="form-label">Id_Categoria:</label>
+            <input type="text" id="Id_Categoria" name="Id_Categoria" value={product.Id_Categoria} onChange={handleInputChange} className="form-control" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Nombre_Producto" className="form-label">Nombre_Producto:</label>
+            <input type="text" id="Nombre_Producto" name="Nombre_Producto" value={product.Nombre_Producto} onChange={handleInputChange} className="form-control" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Descripcion_Producto" className="form-label">Descripcion_Producto:</label>
+            <input type="text" id="Descripcion_Producto" name="Descripcion_Producto" value={product.Descripcion_Producto} onChange={handleInputChange} className="form-control" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Costo_Producto" className="form-label">Costo_Producto:</label>
+            <input type="text" id="Costo_Producto" name="Costo_Producto" value={product.Costo_Producto} onChange={handleInputChange} className="form-control" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Existencias" className="form-label">Existencias:</label>
+            <input type="text" id="Existencias" name="Existencias" value={product.Existencias} onChange={handleInputChange} className="form-control" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="image_url" className="form-label">Image URL:</label>
+            <input type="text" id="image_url" name="image_url" value={product.image_url} onChange={handleInputChange} className="form-control" />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary mt-4 animate__animated animate__zoomIn"
+            onClick={() => {
+              Swal.fire("Producto agregado", "", "success");
+            }}
+          >
+            Agregar producto
+          </button>
+        </form>
+      </div>
+    );
+    
+    
+    
+  };
+  export default AddProduct;
